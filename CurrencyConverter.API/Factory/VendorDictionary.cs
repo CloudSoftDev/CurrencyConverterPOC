@@ -32,5 +32,10 @@ namespace CurrencyConverter.API.Factory
             _vendors.Add("CUL", typeof(CurrencyLayer));
 
         }
+
+        private void VerifyDictionary()
+        {
+
+        }
     }
 }
