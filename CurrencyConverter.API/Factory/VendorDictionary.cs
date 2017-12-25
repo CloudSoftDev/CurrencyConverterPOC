@@ -31,11 +31,23 @@ namespace CurrencyConverter.API.Factory
             _vendors.Add("FIX", typeof(Fixer));
             _vendors.Add("CUL", typeof(CurrencyLayer));
 
+            VerifyDictionary();
+
         }
 
-        private void VerifyDictionary()
+        private static void VerifyDictionary()
         {
-
+            var vendorList = System.Configuration.ConfigurationManager.AppSettings["InActiveVendor"];
+            if (!string.IsNullOrEmpty(vendorList))
+            {
+                string[] inActiveVendors = vendorList.Split(';');
+                foreach (var item in inActiveVendors)
+                {
+                    if (_vendors.ContainsKey(item.ToUpper()))
+                        _vendors.Remove(item.ToUpper());
+                }
+            }
         }
     }
+}
 }
